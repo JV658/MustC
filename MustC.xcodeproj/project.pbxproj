@@ -15,6 +15,7 @@
 		DB018C092B0EA5A100634B36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB018C072B0EA5A100634B36 /* LaunchScreen.storyboard */; };
 		DB018C112B0EAA3500634B36 /* MovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB018C102B0EAA3500634B36 /* MovieTableViewController.swift */; };
 		DB018C132B0EAA8C00634B36 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB018C122B0EAA8C00634B36 /* MovieDetailViewController.swift */; };
+		DB018C1D2B0EBCC600634B36 /* GenreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB018C1C2B0EBCC600634B36 /* GenreTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DB018C0A2B0EA5A100634B36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB018C102B0EAA3500634B36 /* MovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewController.swift; sourceTree = "<group>"; };
 		DB018C122B0EAA8C00634B36 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		DB018C1C2B0EBCC600634B36 /* GenreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				DB018BFB2B0EA59F00634B36 /* SceneDelegate.swift */,
 				DB018C102B0EAA3500634B36 /* MovieTableViewController.swift */,
 				DB018C122B0EAA8C00634B36 /* MovieDetailViewController.swift */,
+				DB018C1C2B0EBCC600634B36 /* GenreTableViewController.swift */,
 				DB018BFF2B0EA59F00634B36 /* Main.storyboard */,
 				DB018C052B0EA5A100634B36 /* Assets.xcassets */,
 				DB018C072B0EA5A100634B36 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				DB018C112B0EAA3500634B36 /* MovieTableViewController.swift in Sources */,
 				DB018C132B0EAA8C00634B36 /* MovieDetailViewController.swift in Sources */,
 				DB018BFA2B0EA59F00634B36 /* AppDelegate.swift in Sources */,
+				DB018C1D2B0EBCC600634B36 /* GenreTableViewController.swift in Sources */,
 				DB018C042B0EA59F00634B36 /* MustC.xcdatamodeld in Sources */,
 				DB018BFC2B0EA59F00634B36 /* SceneDelegate.swift in Sources */,
 			);

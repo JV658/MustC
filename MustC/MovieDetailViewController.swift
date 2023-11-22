@@ -22,6 +22,10 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if movie != nil {
+            titleField.text = movie.title
+            directorField.text = movie.director
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
