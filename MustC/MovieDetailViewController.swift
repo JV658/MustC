@@ -10,6 +10,7 @@ import UIKit
 class MovieDetailViewController: UIViewController {
 
     var container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    var movie: Movies!
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var directorField: UITextField!
@@ -30,10 +31,13 @@ class MovieDetailViewController: UIViewController {
             return
         }
         
-        var newMovie = Movies(context: container.viewContext)
+        if movie == nil {
+            movie = Movies(context: container.viewContext)
+        }
+        
         // modify newMovie to be consistent with the view
-        newMovie.title = titleField.text!
-        newMovie.director = directorField.text!
+        movie.title = titleField.text!
+        movie.director = directorField.text!
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
