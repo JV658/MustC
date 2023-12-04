@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -106,23 +107,30 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rc3-l7-gbb">
-                                        <rect key="frame" x="0.0" y="126" width="377" height="34"/>
+                                        <rect key="frame" x="0.0" y="126" width="377" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ul-LE-N9Y">
-                                                <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3z-PZ-c0o">
-                                                <rect key="frame" x="101.33333333333334" y="0.0" width="275.66666666666663" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-Xt-Pc0">
+                                                <rect key="frame" x="101.33333333333334" y="0.0" width="275.66666666666663" height="30"/>
+                                                <menu key="menu" id="Wd3-uI-AHS">
+                                                    <children>
+                                                        <command title="Item 1" id="7bB-jj-Pc0"/>
+                                                        <command title="Item 2" id="4Ud-a0-W8s"/>
+                                                    </children>
+                                                </menu>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2N-fB-JGU">
-                                        <rect key="frame" x="0.0" y="168" width="377" height="34.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="164" width="377" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Change Genre"/>
                                         <connections>
@@ -130,13 +138,13 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="245" verticalHuggingPriority="245" horizontalCompressionResistancePriority="745" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-Dx-ZhH">
-                                        <rect key="frame" x="0.0" y="210.33333333333329" width="377" height="488.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="206.33333333333329" width="377" height="492.66666666666674"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="K1k-V2-aod" firstAttribute="leading" secondItem="awY-D4-C26" secondAttribute="leading" id="VqU-su-BL9"/>
-                                    <constraint firstItem="aQC-xH-pu2" firstAttribute="leading" secondItem="i3z-PZ-c0o" secondAttribute="leading" id="XsS-pH-c9m"/>
+                                    <constraint firstItem="vqL-Xt-Pc0" firstAttribute="leading" secondItem="aQC-xH-pu2" secondAttribute="leading" id="nYG-8h-c8j"/>
                                     <constraint firstItem="awY-D4-C26" firstAttribute="leading" secondItem="aQC-xH-pu2" secondAttribute="leading" id="vGe-EZ-yTN"/>
                                 </constraints>
                             </stackView>
@@ -153,7 +161,7 @@
                     <navigationItem key="navigationItem" id="zr6-jH-15H"/>
                     <connections>
                         <outlet property="directorField" destination="awY-D4-C26" id="CTE-fb-Owh"/>
-                        <outlet property="genreField" destination="i3z-PZ-c0o" id="9hl-5M-vef"/>
+                        <outlet property="genreDropdown" destination="vqL-Xt-Pc0" id="pmQ-0o-JS5"/>
                         <outlet property="releaseDateField" destination="aQC-xH-pu2" id="dRJ-7g-vmG"/>
                         <outlet property="titleField" destination="K1k-V2-aod" id="REe-es-haw"/>
                     </connections>

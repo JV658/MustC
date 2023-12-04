@@ -15,7 +15,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var directorField: UITextField!
     @IBOutlet weak var releaseDateField: UITextField!
-    @IBOutlet weak var genreField: UITextField!
+    @IBOutlet weak var genreDropdown: UIButton!
     
     
     override func viewDidLoad() {
@@ -25,8 +25,29 @@ class MovieDetailViewController: UIViewController {
         if movie != nil {
             titleField.text = movie.title
             directorField.text = movie.director
-            genreField.text = movie.genre?.name
         }
+        
+        genreDropdown.showsMenuAsPrimaryAction = true
+        genreDropdown.changesSelectionAsPrimaryAction = true
+        
+        // todo: get the genres using a core data fetch
+        
+        // create an array of UIActions based on the results from the prior fetch
+        
+        // make sure that the handler using the core data managed objected to save the proper genre to movie
+        
+        // add UIActions to genredropdown
+        
+        let handler = { (action: UIAction) in
+            print(action.title)
+        }
+        
+        genreDropdown.menu = UIMenu(children: [
+            UIAction(title: "option 1", state: .on, handler: handler),
+            UIAction(title: "option 2", handler: handler),
+            UIAction(title: "option 3", handler: handler),
+            UIAction(title: "option 4", handler: handler)
+        ])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
