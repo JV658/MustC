@@ -104,19 +104,25 @@ class MovieDetailViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        // calculate the amount of rows
-        return 5
+        // TODO: calculate the amount of rows
+        return genres.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        add genres to picker
-        return "test \(row)"
+        // TODO: add genres to picker
+        if movie.genre == genres[row]
+        {
+            genrePicker.selectRow(row, inComponent: 0, animated: true)
+        }
+        return genres[row].name!
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // save genre when selected different element
-        print(row)
+        //TODO: save genre when selected different element
+        movie.genre = genres[row]
     }
+    
+    
     
 
     // MARK: - Navigation
