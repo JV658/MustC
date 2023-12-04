@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailViewController: UIViewController {
 
     var container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     var movie: Movies!
+    var genres: [Genre] = []
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var directorField: UITextField!
@@ -31,23 +33,41 @@ class MovieDetailViewController: UIViewController {
         genreDropdown.changesSelectionAsPrimaryAction = true
         
         // todo: get the genres using a core data fetch
+        let genreFetch = NSFetchRequest<Genre>(entityName: "Genre")
+        genres = try! container.viewContext.fetch(genreFetch)
         
         // create an array of UIActions based on the results from the prior fetch
+        var actionArray: [UIAction] = []
+        
+        for genre in genres {
+            var state: UIMenuElement.State = .off
+            if movie.genre == genre {
+                state = .on
+            }
+            
+            let newAction = UIAction(title: genre.name!,state: state) { action in
+                self.movie.genre = genre
+            }
+            
+            actionArray.append(newAction)
+        }
         
         // make sure that the handler using the core data managed objected to save the proper genre to movie
         
+        
         // add UIActions to genredropdown
-        
-        let handler = { (action: UIAction) in
-            print(action.title)
-        }
-        
-        genreDropdown.menu = UIMenu(children: [
-            UIAction(title: "option 1", state: .on, handler: handler),
-            UIAction(title: "option 2", handler: handler),
-            UIAction(title: "option 3", handler: handler),
-            UIAction(title: "option 4", handler: handler)
-        ])
+        genreDropdown.menu = UIMenu(children: actionArray)
+//
+//        let handler = { (action: UIAction) in
+//            print(action.title)
+//        }
+//
+//        genreDropdown.menu = UIMenu(children: [
+//            UIAction(title: "option 1", state: .on, handler: handler),
+//            UIAction(title: "option 2", handler: handler),
+//            UIAction(title: "option 3", handler: handler),
+//            UIAction(title: "option 4", handler: handler)
+//        ])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
