@@ -76,6 +76,8 @@ class MovieDetailViewController: UIViewController, UIPickerViewDataSource, UIPic
         genrePicker.delegate = self
         genrePicker.dataSource = self
         
+        genrePicker.reloadAllComponents()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,14 +104,17 @@ class MovieDetailViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        // calculate the amount of rows
         return 5
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        add genres to picker
         return "test \(row)"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // save genre when selected different element
         print(row)
     }
     
