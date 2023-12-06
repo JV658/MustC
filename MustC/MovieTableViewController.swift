@@ -11,7 +11,6 @@ import CoreData
 class MovieTableViewController: UITableViewController {
 
     var container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    var movies: [Movies] = []
     var fetchedResultsController: NSFetchedResultsController<Movies>?
     
     override func viewDidLoad() {
@@ -21,7 +20,7 @@ class MovieTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
         let moc = container.viewContext
         let request = NSFetchRequest<Movies>(entityName: "Movies")
@@ -53,14 +52,16 @@ class MovieTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movies.count
+        return fetchedResultsController?.fetchedObjects?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = movies[indexPath.row].title
+        let movie = fetchedResultsController?.object(at: indexPath)
+        
+        cell.textLabel?.text = movie?.title
 
         return cell
     }
@@ -73,17 +74,16 @@ class MovieTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let movie = fetchedResultsController?.object(at: indexPath)
+            container.viewContext.delete(movie!)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -110,10 +110,11 @@ class MovieTableViewController: UITableViewController {
         if segue.identifier == "edit"
         {
             var selectedCellPath = tableView.indexPathForSelectedRow
-            var selectedRow = selectedCellPath?.row
             
             var dst = segue.destination as! MovieDetailViewController
-            dst.movie = movies[selectedRow!]
+            let movie = fetchedResultsController?.object(at: selectedCellPath!)
+            
+            dst.movie = movie
         }
     }
 }
@@ -139,8 +140,18 @@ extension MovieTableViewController: NSFetchedResultsControllerDelegate {
             tableView.insertRows(at: [insertIndex], with: .automatic)
         case .delete:
             // how will this be handled if we delete a row
+            guard let deleteIndex = indexPath
+            else {return}
+            tableView.deleteRows(at: [deleteIndex], with: .automatic)
         case .move:
+            guard let toIndex = newIndexPath,
+                  let fromIndex = indexPath
+            else {return}
+            tableView.moveRow(at: fromIndex, to: toIndex)
         case .update:
+            guard let updateIndex = indexPath
+            else {return}
+            tableView.reloadRows(at: [updateIndex], with: .automatic)
         }
     }
 }
