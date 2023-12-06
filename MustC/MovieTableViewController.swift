@@ -12,6 +12,7 @@ class MovieTableViewController: UITableViewController {
 
     var container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     var movies: [Movies] = []
+    var fetchedResultsController: NSFetchedResultsController<Movies>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +22,26 @@ class MovieTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        let moc = container.viewContext
+        let request = NSFetchRequest<Movies>(entityName: "Movies")
+        
+        // predicates or sort descriptors
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController?.delegate = self
+        
+        do{
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print("fetch request failed. Error: \(error)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let fetchMovie = NSFetchRequest<Movies>(entityName: "Movies")
-        
-        movies = try! container.viewContext.fetch(fetchMovie)
-        
-        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -105,5 +116,32 @@ class MovieTableViewController: UITableViewController {
             dst.movie = movies[selectedRow!]
         }
     }
-
 }
+
+
+// MARK: fetched Results Controller
+extension MovieTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            guard let insertIndex = newIndexPath
+            else {return}
+            tableView.insertRows(at: [insertIndex], with: .automatic)
+        case .delete:
+            // how will this be handled if we delete a row
+        case .move:
+        case .update:
+        }
+    }
+}
+
